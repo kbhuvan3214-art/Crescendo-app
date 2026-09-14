@@ -44,14 +44,16 @@ fun ResizableIconButton(
     indication: Indication? = null,
     onClick: () -> Unit = {},
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     Image(
         painter = painterResource(icon),
         contentDescription = null,
         colorFilter = ColorFilter.tint(color),
         modifier = modifier
+            .skeuomorphicButton(interactionSource)
             .clickable(
                 indication = indication ?: ripple(bounded = false),
-                interactionSource = remember { MutableInteractionSource() },
+                interactionSource = interactionSource,
                 enabled = enabled,
                 onClick = onClick,
             )
@@ -74,6 +76,7 @@ fun IconButton(
         modifier = modifier
             .minimumInteractiveComponentSize()
             .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
+            .skeuomorphicButton(interactionSource)
             .clip(CircleShape)
             .background(color = colors.containerColor)
             .combinedClickable(

@@ -17,6 +17,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
@@ -147,30 +148,37 @@ inline fun ListItem(
     isActive: Boolean = false,
     isAvailable: Boolean = true,
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = if (isActive) {
-            modifier // playing highlight
-                .height(ListItemHeight)
-                .padding(horizontal = 8.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(
-                    color = // selected active
-                        if (isSelected == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
-                        else MaterialTheme.colorScheme.secondaryContainer
-                )
-        } else if (isSelected == true) {
-            modifier // inactive selected
-                .height(ListItemHeight)
-                .padding(horizontal = 8.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(color = MaterialTheme.colorScheme.inversePrimary.copy(alpha = 0.4f))
-        } else {
-            modifier // default
-                .height(ListItemHeight)
-                .padding(horizontal = 8.dp)
-        }
+    Box(
+        modifier = modifier
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .height(ListItemHeight)
+            .clip(RoundedCornerShape(12.dp))
     ) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .liquidGlass(blurRadius = 40f)
+                .background(
+                    color = if (isActive) {
+                        if (isSelected == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
+                        else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f)
+                    } else if (isSelected == true) {
+                        MaterialTheme.colorScheme.inversePrimary.copy(alpha = 0.4f)
+                    } else {
+                        Color.Transparent
+                    }
+                )
+                .border(
+                    width = 0.5.dp,
+                    color = Color.White.copy(alpha = 0.1f),
+                    shape = RoundedCornerShape(12.dp)
+                )
+        )
+        
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxSize()
+        ) {
         Box(
             modifier = Modifier.padding(6.dp),
             contentAlignment = Alignment.Center
@@ -219,6 +227,7 @@ inline fun ListItem(
         }
 
         trailingContent()
+    }
     }
 }
 

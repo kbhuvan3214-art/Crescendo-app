@@ -53,13 +53,9 @@ fun MetrolistTheme(
         )
     }
 
-    // Apply pureBlack modification if needed, similar to original logic
-    val colorScheme = remember(baseColorScheme, pureBlack, darkTheme) {
-        if (darkTheme && pureBlack) {
-            baseColorScheme.pureBlack(true)
-        } else {
-            baseColorScheme
-        }
+    // Apply pureBlack modification forcefully for Crescendo Pitch Black theme
+    val colorScheme = remember(baseColorScheme) {
+        baseColorScheme.pureBlack(true)
     }
 
     // Use standard MaterialTheme instead of MaterialExpressiveTheme
