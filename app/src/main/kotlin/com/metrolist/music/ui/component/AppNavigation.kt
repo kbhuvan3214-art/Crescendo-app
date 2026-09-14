@@ -7,6 +7,7 @@ package com.metrolist.music.ui.component
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -67,13 +68,19 @@ fun AppNavigationRail(
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
 
-    NavigationRail(
-        modifier = modifier.liquidGlass(
-            scrimColor = containerColor,
-            blurRadius = 40f
-        ),
-        containerColor = Color.Transparent
-    ) {
+    Box(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .liquidGlass(
+                    scrimColor = containerColor,
+                    blurRadius = 40f
+                )
+        )
+        NavigationRail(
+            modifier = Modifier,
+            containerColor = Color.Transparent
+        ) {
         Spacer(modifier = Modifier.weight(1f))
 
         navigationItems.forEach { screen ->
@@ -134,6 +141,7 @@ fun AppNavigationRail(
 
         Spacer(modifier = Modifier.weight(1f))
     }
+    }
 }
 
 @Composable
@@ -151,14 +159,20 @@ fun AppNavigationBar(
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
 
-    NavigationBar(
-        modifier = modifier.liquidGlass(
-            scrimColor = containerColor,
-            blurRadius = 40f
-        ),
-        containerColor = Color.Transparent,
-        contentColor = contentColor
-    ) {
+    Box(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .liquidGlass(
+                    scrimColor = containerColor,
+                    blurRadius = 40f
+                )
+        )
+        NavigationBar(
+            modifier = Modifier,
+            containerColor = Color.Transparent,
+            contentColor = contentColor
+        ) {
         navigationItems.forEach { screen ->
             val isSelected = remember(currentRoute, screen.route) {
                 isRouteSelected(currentRoute, screen.route, navigationItems)
@@ -223,5 +237,6 @@ fun AppNavigationBar(
                 } else null
             )
         }
+    }
     }
 }

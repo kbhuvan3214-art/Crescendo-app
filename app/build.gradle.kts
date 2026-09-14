@@ -127,11 +127,11 @@ android {
         }
         debug {
             if (applicationIdOverride == null) {
-                applicationIdSuffix = ".debug"
+                // Removed applicationIdSuffix
             }
             isDebuggable = true
             if (appNameOverride == null) {
-                resValue("string", "app_name", "Crescendo Debug")
+                resValue("string", "app_name", "Crescendo")
             }
             signingConfig =
                 if (workflowDebugKeystoreFile != null) {

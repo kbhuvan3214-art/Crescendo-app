@@ -79,17 +79,19 @@ fun DefaultDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp).liquidGlass(scrimColor = AlertDialogDefaults.containerColor),
+            modifier = Modifier.padding(24.dp),
             shape = AlertDialogDefaults.shape,
             color = Color.Transparent,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
-            Column(
-                horizontalAlignment = horizontalAlignment,
-                modifier =
-                    modifier
-                        .padding(24.dp),
-            ) {
+            Box {
+                Box(modifier = Modifier.matchParentSize().liquidGlass(scrimColor = AlertDialogDefaults.containerColor))
+                Column(
+                    horizontalAlignment = horizontalAlignment,
+                    modifier =
+                        modifier
+                            .padding(24.dp),
+                ) {
                 if (icon != null) {
                     CompositionLocalProvider(LocalContentColor provides AlertDialogDefaults.iconContentColor) {
                         Box(
@@ -137,6 +139,7 @@ fun DefaultDialog(
         }
     }
 }
+}
 
 @Composable
 fun AccountSettingsDialog(
@@ -168,18 +171,19 @@ fun AccountSettingsDialog(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(top = 72.dp, start = 16.dp, end = 16.dp)
-                        .clip(RoundedCornerShape(28.dp))
-                        .liquidGlass(scrimColor = MaterialTheme.colorScheme.surface),
+                        .padding(top = 72.dp, start = 16.dp, end = 16.dp),
                 shape = MaterialTheme.shapes.large,
                 color = Color.Transparent,
                 tonalElevation = 8.dp,
             ) {
-                AccountSettings(
-                    navController = navController,
-                    onClose = onDismiss,
-                    latestVersionName = latestVersionName,
-                )
+                Box {
+                    Box(modifier = Modifier.matchParentSize().clip(MaterialTheme.shapes.large).liquidGlass(scrimColor = MaterialTheme.colorScheme.surface))
+                    AccountSettings(
+                        navController = navController,
+                        onClose = onDismiss,
+                        latestVersionName = latestVersionName,
+                    )
+                }
             }
         }
     }
@@ -254,22 +258,25 @@ fun ListDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp).liquidGlass(scrimColor = AlertDialogDefaults.containerColor),
+            modifier = Modifier.padding(24.dp),
             shape = AlertDialogDefaults.shape,
             color = Color.Transparent,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier =
-                    modifier
-                        .padding(vertical = 24.dp)
-                        .imePadding(),
-            ) {
+            Box {
+                Box(modifier = Modifier.matchParentSize().liquidGlass(scrimColor = AlertDialogDefaults.containerColor))
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier =
+                        modifier
+                            .padding(vertical = 24.dp)
+                            .imePadding(),
+                ) {
                 LazyColumn(content = content)
             }
         }
     }
+}
 }
 
 @Composable
