@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
  * On API 31+, this uses a blur effect. On older APIs, it falls back to a semi-transparent scrim.
  */
 fun Modifier.liquidGlass(
-    scrimColor: Color = Color.Black.copy(alpha = 0.4f),
+    scrimColor: Color = Color.Black.copy(alpha = 0.85f),
     blurRadius: Float = 30f
 ): Modifier = composed {
     val glassModifier = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -30,7 +30,7 @@ fun Modifier.liquidGlass(
             )
             renderEffect = blurEffect.asComposeRenderEffect()
             clip = true
-        }.background(scrimColor.copy(alpha = 0.2f))
+        }.background(scrimColor)
     } else {
         this.background(scrimColor)
     }

@@ -154,7 +154,7 @@ fun AppNavigationBar(
     slimNav: Boolean = false,
     onSearchLongClick: (() -> Unit)? = null
 ) {
-    val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
+    val containerColor = if (pureBlack) Color.Black.copy(alpha = 0.85f) else MaterialTheme.colorScheme.surfaceContainer
     val contentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
