@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Widget colors for dark mode -->
-    <color name="widget_text_primary">#E6E1E5</color>
-    <color name="widget_text_secondary">#CAC4D0</color>
+    <color name="widget_text_primary">#FAFAFA</color>
+    <color name="widget_text_secondary">#B0B0B0</color>
 </resources>
