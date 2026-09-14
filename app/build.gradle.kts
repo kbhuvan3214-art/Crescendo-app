@@ -35,7 +35,7 @@ android {
         targetSdk = 36
         versionCode = 25
         versionName = "0.8.9"
-        resValue("string", "app_name", appNameOverride ?: "Meld")
+        resValue("string", "app_name", appNameOverride ?: "Crescendo")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -131,7 +131,7 @@ android {
             }
             isDebuggable = true
             if (appNameOverride == null) {
-                resValue("string", "app_name", "Meld Debug")
+                resValue("string", "app_name", "Crescendo Debug")
             }
             signingConfig =
                 if (workflowDebugKeystoreFile != null) {

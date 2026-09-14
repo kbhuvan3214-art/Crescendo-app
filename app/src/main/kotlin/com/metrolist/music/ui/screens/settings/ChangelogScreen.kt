@@ -47,14 +47,21 @@ fun ChangelogScreen(
     val uriHandler = LocalUriHandler.current
 
     LaunchedEffect(Unit) {
-        Updater.getAllReleases().onSuccess { allReleases ->
-            releases = allReleases.filter { release ->
-                Updater.compareVersions(BuildConfig.VERSION_NAME, release.tagName) >= 0
-            }
-            isLoading = false
-        }.onFailure {
-            isLoading = false
-        }
+        // Show Crescendo initial release changelog instead of fetching Meld's history
+        releases = listOf(
+            ReleaseInfo(
+                tagName = "v1.0.0",
+                versionName = "Crescendo 1.0.0",
+                description = "### Welcome to Crescendo!\n\n" +
+                        "* **Liquid Glass UI**: New translucent blurred surfaces across the app navigation, mini player, and dialogs.\n" +
+                        "* **Tactile Skeuomorphism**: The player controls now respond with physical spring physics and drop shadows.\n" +
+                        "* **Spinning Record**: The now-playing thumbnail now acts as a spinning vinyl record when music plays.\n" +
+                        "* **Grooved Sliders**: Enhanced seek bars with a raised disc thumb and inset track shadows.",
+                releaseDate = "2026-09-14T00:00:00Z",
+                assets = emptyList()
+            )
+        )
+        isLoading = false
     }
 
     val sheetState = rememberModalBottomSheetState(

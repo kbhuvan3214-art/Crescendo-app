@@ -61,6 +61,8 @@ import androidx.navigation.NavController
 import com.metrolist.music.R
 import com.metrolist.music.ui.screens.settings.AccountSettings
 import kotlinx.coroutines.delay
+import com.metrolist.music.ui.component.liquidGlass
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun DefaultDialog(
@@ -77,9 +79,9 @@ fun DefaultDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(24.dp).liquidGlass(scrimColor = AlertDialogDefaults.containerColor),
             shape = AlertDialogDefaults.shape,
-            color = AlertDialogDefaults.containerColor,
+            color = Color.Transparent,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
             Column(
@@ -167,9 +169,10 @@ fun AccountSettingsDialog(
                     Modifier
                         .fillMaxWidth()
                         .padding(top = 72.dp, start = 16.dp, end = 16.dp)
-                        .clip(RoundedCornerShape(28.dp)),
+                        .clip(RoundedCornerShape(28.dp))
+                        .liquidGlass(scrimColor = MaterialTheme.colorScheme.surface),
                 shape = MaterialTheme.shapes.large,
-                color = MaterialTheme.colorScheme.surface,
+                color = Color.Transparent,
                 tonalElevation = 8.dp,
             ) {
                 AccountSettings(
@@ -251,9 +254,9 @@ fun ListDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(24.dp).liquidGlass(scrimColor = AlertDialogDefaults.containerColor),
             shape = AlertDialogDefaults.shape,
-            color = AlertDialogDefaults.containerColor,
+            color = Color.Transparent,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
             Column(

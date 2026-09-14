@@ -68,8 +68,11 @@ fun AppNavigationRail(
     val viewConfiguration = LocalViewConfiguration.current
 
     NavigationRail(
-        modifier = modifier,
-        containerColor = containerColor
+        modifier = modifier.liquidGlass(
+            scrimColor = containerColor,
+            blurRadius = 40f
+        ),
+        containerColor = Color.Transparent
     ) {
         Spacer(modifier = Modifier.weight(1f))
 
@@ -149,8 +152,11 @@ fun AppNavigationBar(
     val viewConfiguration = LocalViewConfiguration.current
 
     NavigationBar(
-        modifier = modifier,
-        containerColor = containerColor,
+        modifier = modifier.liquidGlass(
+            scrimColor = containerColor,
+            blurRadius = 40f
+        ),
+        containerColor = Color.Transparent,
         contentColor = contentColor
     ) {
         navigationItems.forEach { screen ->

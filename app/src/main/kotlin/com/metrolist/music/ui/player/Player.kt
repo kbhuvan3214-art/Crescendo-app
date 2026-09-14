@@ -92,6 +92,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
@@ -161,6 +162,7 @@ import com.metrolist.music.ui.component.BottomSheetState
 import com.metrolist.music.ui.component.LocalBottomSheetPageState
 import com.metrolist.music.ui.component.LocalMenuState
 import com.metrolist.music.ui.component.Lyrics
+import com.metrolist.music.ui.component.PlayerSliderThumb
 import com.metrolist.music.ui.component.PlayerSliderTrack
 import com.metrolist.music.ui.component.ResizableIconButton
 import com.metrolist.music.ui.component.SquigglySlider
@@ -1342,6 +1344,18 @@ fun BottomSheetPlayer(
                             }
                         },
                         enabled = !isListenTogetherGuest,
+                        thumb = { sliderState -> 
+                            PlayerSliderThumb(
+                                sliderState = sliderState,
+                                colors = PlayerSliderColors.getSliderColors(textButtonColor, playerBackground, useDarkTheme)
+                            ) 
+                        },
+                        track = { sliderState -> 
+                            PlayerSliderTrack(
+                                sliderState = sliderState,
+                                colors = PlayerSliderColors.getSliderColors(textButtonColor, playerBackground, useDarkTheme)
+                            ) 
+                        },
                         colors = PlayerSliderColors.getSliderColors(textButtonColor, playerBackground, useDarkTheme),
                         modifier = Modifier.padding(horizontal = PlayerHorizontalPadding),
                     )
@@ -1536,6 +1550,17 @@ fun BottomSheetPlayer(
                                 label = "nextButtonWeight",
                             )
 
+                            val backScale by animateFloatAsState(
+                                targetValue = if (isBackPressed) 0.95f else 1f,
+                                animationSpec = spring(dampingRatio = 0.6f, stiffness = 500f),
+                                label = "backScale"
+                            )
+                            val backElevation by animateFloatAsState(
+                                targetValue = if (isBackPressed) 1f else 6f,
+                                animationSpec = spring(dampingRatio = 0.6f, stiffness = 500f),
+                                label = "backElevation"
+                            )
+
                             FilledIconButton(
                                 onClick = playerConnection::seekToPrevious,
                                 enabled = canSkipPrevious && !isListenTogetherGuest,
@@ -1549,7 +1574,14 @@ fun BottomSheetPlayer(
                                 modifier =
                                     Modifier
                                         .height(68.dp)
-                                        .weight(backButtonWeight),
+                                        .weight(backButtonWeight)
+                                        .graphicsLayer {
+                                            scaleX = backScale
+                                            scaleY = backScale
+                                            shadowElevation = backElevation
+                                            shape = RoundedCornerShape(50)
+                                            clip = true
+                                        },
                             ) {
                                 Icon(
                                     painter = painterResource(R.drawable.skip_previous),
@@ -1559,6 +1591,17 @@ fun BottomSheetPlayer(
                             }
 
                             Spacer(modifier = Modifier.width(8.dp))
+
+                            val playPauseScale by animateFloatAsState(
+                                targetValue = if (isPlayPausePressed) 0.95f else 1f,
+                                animationSpec = spring(dampingRatio = 0.6f, stiffness = 500f),
+                                label = "playPauseScale"
+                            )
+                            val playPauseElevation by animateFloatAsState(
+                                targetValue = if (isPlayPausePressed) 2f else 12f,
+                                animationSpec = spring(dampingRatio = 0.6f, stiffness = 500f),
+                                label = "playPauseElevation"
+                            )
 
                             FilledIconButton(
                                 onClick = {
@@ -1589,7 +1632,14 @@ fun BottomSheetPlayer(
                                 modifier =
                                     Modifier
                                         .height(68.dp)
-                                        .weight(playPauseWeight),
+                                        .weight(playPauseWeight)
+                                        .graphicsLayer {
+                                            scaleX = playPauseScale
+                                            scaleY = playPauseScale
+                                            shadowElevation = playPauseElevation
+                                            shape = RoundedCornerShape(50)
+                                            clip = true
+                                        },
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
@@ -1627,6 +1677,17 @@ fun BottomSheetPlayer(
 
                             Spacer(modifier = Modifier.width(8.dp))
 
+                            val nextScale by animateFloatAsState(
+                                targetValue = if (isNextPressed) 0.95f else 1f,
+                                animationSpec = spring(dampingRatio = 0.6f, stiffness = 500f),
+                                label = "nextScale"
+                            )
+                            val nextElevation by animateFloatAsState(
+                                targetValue = if (isNextPressed) 1f else 6f,
+                                animationSpec = spring(dampingRatio = 0.6f, stiffness = 500f),
+                                label = "nextElevation"
+                            )
+
                             FilledIconButton(
                                 onClick = playerConnection::seekToNext,
                                 enabled = canSkipNext && !isListenTogetherGuest,
@@ -1640,7 +1701,14 @@ fun BottomSheetPlayer(
                                 modifier =
                                     Modifier
                                         .height(68.dp)
-                                        .weight(nextButtonWeight),
+                                        .weight(nextButtonWeight)
+                                        .graphicsLayer {
+                                            scaleX = nextScale
+                                            scaleY = nextScale
+                                            shadowElevation = nextElevation
+                                            shape = RoundedCornerShape(50)
+                                            clip = true
+                                        },
                             ) {
                                 Icon(
                                     painter = painterResource(R.drawable.skip_next),

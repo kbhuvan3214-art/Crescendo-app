@@ -586,7 +586,9 @@ private fun ThumbnailItem(
 
                 ThumbnailImage(
                     artworkUri = artworkUriToUse,
-                    cropArtwork = cropAlbumArt
+                    cropArtwork = cropAlbumArt,
+                    isPlaying = playerConnection.player.isPlaying,
+                    isSpinningRecord = true
                 )
             }
             
@@ -631,24 +633,39 @@ private fun HiddenThumbnailPlaceholder(
 private fun ThumbnailImage(
     artworkUri: String?,
     cropArtwork: Boolean,
+    isSpinningRecord: Boolean = true,
+    isPlaying: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    // Player artwork covers the full width of the screen. Default thumbnail URLs
-    // stored on MediaMetadata are sized to 544×544, which looks soft on modern
-    // displays (#127). Re-resize to 1080 — `resize` is a no-op for non-YT URLs
-    // and just rewrites the `w/h` query params for YT googleusercontent CDN /
-    // the variant filename for i.ytimg.com video thumbnails.
     val hiResUri = remember(artworkUri) { artworkUri?.resize(1080, 1080) }
-    // maxresdefault.jpg isn't generated for every YouTube video — fall back
-    // down the variant ladder (sd → hq → mq) on 404. Coil-3 doesn't have a
-    // built-in URL fallback chain, so we drive it from compose state and
-    // pass the current candidate back through `setData()` on each error.
     var currentUri by remember(hiResUri) { mutableStateOf(hiResUri) }
+    
+    var rotation by remember { androidx.compose.runtime.mutableFloatStateOf(0f) }
+    var lastUpdate by remember { androidx.compose.runtime.mutableLongStateOf(0L) }
+    
+    LaunchedEffect(isPlaying, isSpinningRecord) {
+        if (isPlaying && isSpinningRecord) {
+            lastUpdate = androidx.compose.runtime.withFrameMillis { it }
+            while (true) {
+                androidx.compose.runtime.withFrameMillis { frameTime ->
+                    val delta = frameTime - lastUpdate
+                    rotation = (rotation + (delta * 360f / 10000f)) % 360f
+                    lastUpdate = frameTime
+                }
+            }
+        }
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
             .graphicsLayer {
                 compositingStrategy = CompositingStrategy.Offscreen
+                if (isSpinningRecord) {
+                    rotationZ = rotation
+                    shape = androidx.compose.foundation.shape.CircleShape
+                    clip = true
+                }
             }
             .background(MaterialTheme.colorScheme.surfaceVariant)
     ) {
@@ -661,7 +678,7 @@ private fun ThumbnailImage(
                 .networkCachePolicy(CachePolicy.ENABLED)
                 .build(),
             contentDescription = null,
-            contentScale = if (cropArtwork) ContentScale.Crop else ContentScale.Fit,
+            contentScale = if (cropArtwork || isSpinningRecord) ContentScale.Crop else ContentScale.Fit,
             modifier = Modifier.fillMaxSize(),
         ) {
             val state = painter.state.collectAsState().value
@@ -677,6 +694,40 @@ private fun ThumbnailImage(
                 else -> {}
             }
             SubcomposeAsyncImageContent()
+            
+            // Vinyl overlay
+            if (isSpinningRecord) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            brush = androidx.compose.ui.graphics.Brush.radialGradient(
+                                colors = listOf(
+                                    Color.Transparent,
+                                    Color.Black.copy(alpha = 0.4f),
+                                    Color.Black.copy(alpha = 0.8f)
+                                )
+                            )
+                        )
+                ) {
+                    // Center hole
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .fillMaxSize(0.15f)
+                            .background(Color.Black, androidx.compose.foundation.shape.CircleShape)
+                            .background(
+                                brush = androidx.compose.ui.graphics.Brush.radialGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.surfaceVariant,
+                                        Color.DarkGray
+                                    )
+                                ),
+                                shape = androidx.compose.foundation.shape.CircleShape
+                            )
+                    )
+                }
+            }
         }
     }
 }

@@ -121,6 +121,7 @@ import kotlinx.coroutines.withContext
 import com.metrolist.music.ui.theme.PlayerColorExtractor
 import com.metrolist.music.ui.component.LocalMenuState
 import com.metrolist.music.ui.menu.AddToPlaylistDialog
+import com.metrolist.music.ui.component.liquidGlass
 
 /**
  * Stable wrapper for progress state - reads values only during draw phase
@@ -380,9 +381,9 @@ private fun NewMiniPlayer(
                     .height(64.dp)
                     .offset { IntOffset(offsetXAnimatable.value.roundToInt(), 0) }
                     .clip(RoundedCornerShape(32.dp))
-                    .background(color = backgroundColor)
                     .border(1.dp, outlineColor.copy(alpha = 0.3f), RoundedCornerShape(32.dp)),
         ) {
+            Box(modifier = Modifier.fillMaxSize().liquidGlass(scrimColor = backgroundColor, blurRadius = 40f))
             when (miniPlayerBackground) {
                 MiniPlayerBackgroundStyle.BLUR -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
@@ -649,7 +650,15 @@ private fun NewMiniPlayerSongInfo(
     val error by LocalPlayerConnection.current?.error?.collectAsState() ?: remember { mutableStateOf(null) }
 
     Column(
-        modifier = modifier,
+        modifier = modifier.background(
+            Brush.horizontalGradient(
+                colors = listOf(
+                    Color.Black.copy(alpha = 0.4f),
+                    Color.Transparent
+                )
+            ),
+            shape = RoundedCornerShape(8.dp)
+        ).padding(horizontal = 4.dp),
         verticalArrangement = Arrangement.Center,
     ) {
         mediaMetadata?.let { metadata ->
