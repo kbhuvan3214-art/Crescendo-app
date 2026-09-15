@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-09-15T11:17:10Z",
+  "bundle_id": "web-player.a44b7941.js",
+  "operations": {
+    "profileAttributes": {
+      "hash": "08ffb4730af3746e04a8301396f20875dbbce10c75243803091a9274eacc8ac0",
+      "previous_hash": "b197b5adb4b761690f76ad9d9fb278c14c14e7331f357c04a56e7001af7106e0",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-07-23T08:22:07Z"
+    },
+    "libraryV3": {
+      "hash": "390c78e5b951029bad359785e69b07b536a509c581cbcd0aded5e5067f187455",
+      "previous_hash": "973e511ca44261fda7eebac8b653155e7caee3675abb4fb110cc1b8c78b091c3",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-07-23T08:22:07Z"
+    },
+    "fetchPlaylist": {
+      "hash": "86dde7b9d9356e2369414647cf6950cfed96e778e129cfdfc99aea6c1613b3b0",
+      "previous_hash": "e4b2953f160e58e38ac025d79b5a9b3aceee5c4c716598e9830bfceb69faff5f",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-08-13T07:18:10Z"
+    },
+    "fetchLibraryTracks": {
+      "hash": "087278b20b743578a6262c2b0b4bcd20d879c503cc359a2285baf083ef944240",
+      "previous_hash": null,
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": null
+    },
+    "searchDesktop": {
+      "hash": "db61238974d27839a136c9dc02bfdbe3fab7635f21cf85976ebff9a1ee281345",
+      "previous_hash": "4801118d4a100f756e833d33984436a3899cff359c532f8fd3aaf174b60b3b49",
+      "type": "query",
+      "status": "not_in_bundle",
+      "last_verified": "2026-08-05T08:27:17Z",
+      "last_changed": "2026-07-29T08:31:00Z"
+    },
+    "queryArtistOverview": {
+      "hash": "9f8134ef565e78621f1e1793555bd6633c5ac144ae0f89604ed3ae3f80b3c8e6",
+      "previous_hash": "7bdc7185c219898c7a2b659cfff2f8ce066dd2d9a97f8b7c4bde92ccfec28310",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-09-15T11:17:10Z"
+    },
+    "getAlbum": {
+      "hash": "6a74b456cd1735c9193d9e8ec8cc5184cad7ce13572210315229db3975964361",
+      "previous_hash": "b9bfabef66ed756e5e13f68a942deb60bd4125ec1f1be8cc42769dc0259b4b10",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-09-05T09:51:07Z"
+    },
+    "queryWhatsNewFeed": {
+      "hash": "d889c8c936ab192af8ced595427f5ba2acdf63478fdc0a181c8d477f8322630e",
+      "previous_hash": "3b53dede3c6054e8b7c962dd280eb6761c5d1c82b06b039f4110d76a62b4966b",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-03-31T06:30:04Z"
+    },
+    "addToPlaylist": {
+      "hash": "47b2a1234b17748d332dd0431534f22450e9ecbb3d5ddcdacbd83368636a0990",
+      "previous_hash": null,
+      "type": "mutation",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": null
+    },
+    "removeFromPlaylist": {
+      "hash": "47b2a1234b17748d332dd0431534f22450e9ecbb3d5ddcdacbd83368636a0990",
+      "previous_hash": null,
+      "type": "mutation",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": null
+    },
+    "moveItemsInPlaylist": {
+      "hash": "47b2a1234b17748d332dd0431534f22450e9ecbb3d5ddcdacbd83368636a0990",
+      "previous_hash": null,
+      "type": "mutation",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": null
+    },
+    "editPlaylistAttributes": {
+      "hash": "35a1a9ce3a2f4f8c32ee0e24c63c2069c6613c0a0b7e56d0e40dabe69a0b4f80",
+      "previous_hash": null,
+      "type": "mutation",
+      "status": "not_in_bundle",
+      "last_verified": "2026-03-23T00:00:00Z",
+      "last_changed": null
+    },
+    "addToLibrary": {
+      "hash": "1ad0d40b3c09660d818b9e770eb1e84745dfbe941df159a64f8772b6fa2bfc3a",
+      "previous_hash": "7c5a69420e2bfae3da5cc4e14cbc8bb3f6090f80afc00ffc179177f19be3f33d",
+      "type": "mutation",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-07-04T08:29:50Z"
+    },
+    "removeFromLibrary": {
+      "hash": "1ad0d40b3c09660d818b9e770eb1e84745dfbe941df159a64f8772b6fa2bfc3a",
+      "previous_hash": "7c5a69420e2bfae3da5cc4e14cbc8bb3f6090f80afc00ffc179177f19be3f33d",
+      "type": "mutation",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-07-04T08:29:50Z"
+    },
+    "home": {
+      "hash": "76243c78b0e20ecdbe41b794dec8cbe73f75e585b0a7201b8d2e84578412847a",
+      "previous_hash": "5366cbf1f73f8c813dd0f1addc6934950f0dd529cec907107c85851e645c2d16",
+      "type": "query",
+      "status": "verified",
+      "last_verified": "2026-09-15T11:17:10Z",
+      "last_changed": "2026-07-17T08:00:38Z"
+    }
+  }
+}
