@@ -1,5 +1,5 @@
 /**
- * Metrolist Project (C) 2026
+ * Crescendo Project (C) 2026
  * Licensed under GPL-3.0 | See git history for contributors
  */
 
@@ -56,7 +56,9 @@ fun ChangelogScreen(
                         "* **Liquid Glass UI**: New translucent blurred surfaces across the app navigation, mini player, and dialogs.\n" +
                         "* **Tactile Skeuomorphism**: The player controls now respond with physical spring physics and drop shadows.\n" +
                         "* **Spinning Record**: The now-playing thumbnail now acts as a spinning vinyl record when music plays.\n" +
-                        "* **Grooved Sliders**: Enhanced seek bars with a raised disc thumb and inset track shadows.",
+                        "* **Grooved Sliders**: Enhanced seek bars with a raised disc thumb and inset track shadows.\n" +
+                        "* **Rebranding**: Completely rebranded the app from Meld/Metrolist to Crescendo across all screens, dialogs, and translations.\n" +
+                        "* **Bug Fixes**: Fixed crashes on older Android versions (minSdk 23) by resolving adaptive icon resource missing errors and bumping the minimum supported version.",
                 releaseDate = "2026-09-14T00:00:00Z",
                 assets = emptyList()
             )

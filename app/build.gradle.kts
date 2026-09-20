@@ -31,11 +31,12 @@ android {
 
     defaultConfig {
         applicationId = applicationIdOverride ?: "com.meld.app"
-        minSdk = 26
+        minSdk = 23
         targetSdk = 36
-        versionCode = 25
-        versionName = "0.8.9"
+        versionCode = 26
+        versionName = "1.0.0"
         resValue("string", "app_name", appNameOverride ?: "Crescendo")
+        setProperty("archivesBaseName", "crescendo")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -52,7 +53,7 @@ android {
         // and a fine-grained PAT with issues:write scoped to that repo only.
         // Both must be present at build time for reporting to be active at runtime.
         val crashRepo = localProperties.getProperty("CRASH_REPORT_REPO")
-            ?: System.getenv("CRASH_REPORT_REPO") ?: "francescograzioso/Meld"
+            ?: System.getenv("CRASH_REPORT_REPO") ?: "francescograzioso/Crescendo"
         val crashToken = localProperties.getProperty("CRASH_REPORT_TOKEN")
             ?: System.getenv("CRASH_REPORT_TOKEN") ?: ""
         buildConfigField("String", "CRASH_REPORT_REPO", "\"$crashRepo\"")
