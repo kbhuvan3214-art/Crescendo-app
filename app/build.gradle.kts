@@ -25,6 +25,14 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+androidComponents {
+    onVariants { variant ->
+        variant.outputs.forEach { output ->
+            output.outputFileName.set("crescendo.apk")
+        }
+    }
+}
+
 android {
     namespace = "com.metrolist.music"
     compileSdk = 36
@@ -143,13 +151,6 @@ android {
                 }
             ndk {
                 debugSymbolLevel = "FULL"
-            }
-        }
-
-        applicationVariants.all {
-            outputs.all {
-                val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-                outputImpl.outputFileName = "crescendo.apk"
             }
         }
     }
