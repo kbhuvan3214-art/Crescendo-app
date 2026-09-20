@@ -145,10 +145,13 @@ android {
                 debugSymbolLevel = "FULL"
             }
         }
-    }
 
-    base {
-        archivesName.set("crescendo")
+        applicationVariants.all {
+            outputs.all {
+                val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+                outputImpl.outputFileName = "crescendo.apk"
+            }
+        }
     }
 
     compileOptions {
