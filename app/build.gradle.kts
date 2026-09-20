@@ -151,18 +151,6 @@ android {
         }
     }
 
-    tasks.whenTaskAdded {
-        if (name == "assembleFossDebug") {
-            doLast {
-                val originalApk = file("build/outputs/apk/foss/debug/crescendo-foss-debug.apk")
-                val renamedApk = file("build/outputs/apk/foss/debug/crescendo.apk")
-                if (originalApk.exists()) {
-                    originalApk.renameTo(renamedApk)
-                }
-            }
-        }
-    }
-
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_21
