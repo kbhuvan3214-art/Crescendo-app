@@ -36,7 +36,6 @@ android {
         versionCode = 26
         versionName = "1.0.0"
         resValue("string", "app_name", appNameOverride ?: "Crescendo")
-        setProperty("archivesBaseName", "crescendo")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -146,6 +145,10 @@ android {
                 debugSymbolLevel = "FULL"
             }
         }
+    }
+
+    base {
+        archivesName.set("crescendo")
     }
 
     compileOptions {
