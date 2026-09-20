@@ -25,12 +25,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-androidComponents {
-    onVariants { variant ->
-        variant.outputs.forEach { output ->
-            output.outputFileName.set("crescendo.apk")
-        }
-    }
+base {
+    archivesName.set("crescendo")
 }
 
 android {
@@ -151,6 +147,18 @@ android {
                 }
             ndk {
                 debugSymbolLevel = "FULL"
+            }
+        }
+    }
+
+    tasks.whenTaskAdded {
+        if (name == "assembleFossDebug") {
+            doLast {
+                val originalApk = file("build/outputs/apk/foss/debug/crescendo-foss-debug.apk")
+                val renamedApk = file("build/outputs/apk/foss/debug/crescendo.apk")
+                if (originalApk.exists()) {
+                    originalApk.renameTo(renamedApk)
+                }
             }
         }
     }
