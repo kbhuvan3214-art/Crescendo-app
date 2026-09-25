@@ -43,7 +43,7 @@ object AnrWatchdog {
         if (started) return
         started = true
         Thread(::run).apply {
-            name = "Meld-ANR-Watchdog"
+            name = "Crescendo-ANR-Watchdog"
             isDaemon = true
             priority = Thread.MIN_PRIORITY + 2
             start()

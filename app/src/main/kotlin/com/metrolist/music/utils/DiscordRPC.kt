@@ -69,11 +69,11 @@ class DiscordRPC(
         }
         if (button2Visible) {
             val label = resolveVariables(
-                button2Text.ifEmpty { "Visit Meld" },
+                button2Text.ifEmpty { "Visit Crescendo" },
                 song
             ).take(BUTTON_LABEL_MAX)
             val url = resolveVariables(
-                button2Url.ifEmpty { "https://github.com/FrancescoGrazioso/Meld" },
+                button2Url.ifEmpty { "https://github.com/kbhuvan3214-art/Crescendo-app" },
                 song
             ).trim()
             if (label.isNotBlank() && url.isValidButtonUrl()) {

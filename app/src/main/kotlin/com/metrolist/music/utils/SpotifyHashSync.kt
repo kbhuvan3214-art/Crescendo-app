@@ -31,7 +31,7 @@ class SpotifyHashSync(private val context: Context) {
 
     companion object {
         private const val REMOTE_URL =
-            "https://francescograzioso.github.io/Meld/spotify-gql-hashes.json"
+            "https://kbhuvan3214-art.github.io/Crescendo-app/spotify-gql-hashes.json"
         private const val STALE_THRESHOLD_MS = 24 * 60 * 60 * 1000L // 24 hours
         private const val FETCH_TIMEOUT_MS = 10_000
 

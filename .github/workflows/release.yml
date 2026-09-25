@@ -110,7 +110,7 @@ jobs:
         run: ./gradlew --no-configuration-cache --console=plain clean assemble${{ matrix.variantName }}Release :app:lint${{ matrix.variantName }}Release --warning-mode summary
         env:
           METROLIST_APPLICATION_ID: com.meld.app
-          METROLIST_APP_NAME: Meld
+          METROLIST_APP_NAME: Crescendo
           PULL_REQUEST: "false"
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
@@ -118,7 +118,7 @@ jobs:
           # Without these the in-app crash/ANR reporter silently disables itself
           # (CrashReporter.isEnabledSafe), so shipped builds report nothing.
           CRASH_REPORT_TOKEN: ${{ secrets.CRASH_REPORT_TOKEN }}
-          CRASH_REPORT_REPO: ${{ vars.CRASH_REPORT_REPO || 'FrancescoGrazioso/Meld' }}
+          CRASH_REPORT_REPO: ${{ vars.CRASH_REPORT_REPO || 'kbhuvan3214-art/Crescendo-app' }}
 
       - name: Sign APK
         uses: ilharp/sign-android-release@v2.0.0
@@ -144,11 +144,11 @@ jobs:
           fi
 
           if [ "${{ matrix.variant }}" = "gms" ]; then
-            TARGET_NAME="Meld-with-Google-Cast.apk"
+            TARGET_NAME="Crescendo-with-Google-Cast.apk"
           elif [ "${{ matrix.variant }}" = "izzy" ]; then
-            TARGET_NAME="Meld-izzy.apk"
+            TARGET_NAME="Crescendo-izzy.apk"
           else
-            TARGET_NAME="Meld.apk"
+            TARGET_NAME="crescendo.apk"
           fi
 
           mv "$SIGNED_APK" "$OUTPUT_DIR/out/$TARGET_NAME"
@@ -159,7 +159,7 @@ jobs:
       - name: Upload Signed APKs
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ matrix.variant == 'gms' && 'Meld-with-Google-Cast' || matrix.variant == 'izzy' && 'Meld-izzy' || 'Meld' }}
+          name: ${{ matrix.variant == 'gms' && 'Crescendo-with-Google-Cast' || matrix.variant == 'izzy' && 'Crescendo-izzy' || 'Crescendo' }}
           path: app/build/outputs/apk/${{ matrix.variant }}/release/out/*.apk
 
   create-release:

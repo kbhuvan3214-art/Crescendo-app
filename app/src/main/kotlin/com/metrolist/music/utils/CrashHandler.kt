@@ -80,7 +80,7 @@ class CrashHandler private constructor(
         }.toString()
 
         return buildString {
-            appendLine("Meld Crash Report")
+            appendLine("Crescendo Crash Report")
             appendLine("=".repeat(50))
             appendLine()
             appendLine("Manufacturer: ${Build.MANUFACTURER}")

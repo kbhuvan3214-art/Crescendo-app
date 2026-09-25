@@ -120,8 +120,8 @@ private val upstreamCollaborators = listOf(
 
 private val communityLinks = listOf(
     CommunityLink(R.string.credits_discord, R.drawable.discord, "https://discord.gg/sAErRUVbsK"),
-    CommunityLink(R.string.credits_view_repo, R.drawable.github, "https://github.com/FrancescoGrazioso/Meld"),
-    CommunityLink(R.string.credits_license_name, R.drawable.info, "https://github.com/FrancescoGrazioso/Meld/blob/main/LICENSE")
+    CommunityLink(R.string.credits_view_repo, R.drawable.github, "https://github.com/kbhuvan3214-art/Crescendo-app"),
+    CommunityLink(R.string.credits_license_name, R.drawable.info, "https://github.com/kbhuvan3214-art/Crescendo-app/blob/main/LICENSE")
 )
 
 private fun handleEasterEggClick(

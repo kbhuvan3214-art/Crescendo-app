@@ -103,9 +103,9 @@ android {
         }
         create("release") {
             storeFile = file("keystore/release.keystore")
-            storePassword = System.getenv("STORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+            storePassword = System.getenv("STORE_PASSWORD") ?: "crescendo123"
+            keyAlias = System.getenv("KEY_ALIAS") ?: "crescendo"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "crescendo123"
         }
         getByName("debug") {
             keyAlias = "androiddebugkey"
@@ -121,6 +121,7 @@ android {
             isShrinkResources = true
             isCrunchPngs = false
             isDebuggable = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",

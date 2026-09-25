@@ -678,7 +678,7 @@ class PlaybackForbiddenDiagnosticsTest {
                 null
             }
             emit("=================================================================")
-            emit(" Meld / Metrolist — playback 403 diagnostics")
+            emit(" Crescendo / Metrolist — playback 403 diagnostics")
             emit(" videoIds            : ${videoIds.joinToString()}")
             emit(" network             : $networkAvailable")
             emit(" visitorData         : ${sessionVisitorData?.take(24) ?: "UNAVAILABLE"}")

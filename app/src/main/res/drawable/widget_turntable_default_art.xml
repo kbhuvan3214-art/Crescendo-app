@@ -14,6 +14,6 @@
     </item>
     <!-- Centered app icon -->
     <item
-        android:drawable="@drawable/ic_launcher_foreground"
+        android:drawable="@mipmap/ic_launcher_foreground"
         android:gravity="center" />
 </layer-list>

@@ -304,7 +304,7 @@ object CrashReporter {
             setRequestProperty("Accept", "application/vnd.github+json")
             setRequestProperty("X-GitHub-Api-Version", "2022-11-28")
             setRequestProperty("Content-Type", "application/json; charset=utf-8")
-            setRequestProperty("User-Agent", "Meld-CrashReporter/${BuildConfig.VERSION_NAME}")
+            setRequestProperty("User-Agent", "Crescendo-CrashReporter/${BuildConfig.VERSION_NAME}")
         }
         return try {
             conn.outputStream.use { it.write(payload.toByteArray(Charsets.UTF_8)) }

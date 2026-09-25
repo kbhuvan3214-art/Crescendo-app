@@ -96,8 +96,8 @@ object Updater {
             
             // Parse architecture and variant from filename
             val (arch, variant) = when {
-                name == "Meld.apk" -> "universal" to "foss"
-                name == "Meld-with-Google-Cast.apk" -> "universal" to "gms"
+                name == "crescendo.apk" -> "universal" to "foss"
+                name == "crescendo-with-Google-Cast.apk" -> "universal" to "gms"
                 name.startsWith("app-") && name.endsWith("-release.apk") -> {
                     val arch = name.removePrefix("app-").removeSuffix("-release.apk")
                     arch to "foss"
