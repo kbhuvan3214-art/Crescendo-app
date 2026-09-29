@@ -102,10 +102,13 @@ android {
             keyPassword = debugKeyPassword
         }
         create("release") {
-            storeFile = file("keystore/release.keystore")
-            storePassword = System.getenv("STORE_PASSWORD") ?: "crescendo123"
-            keyAlias = System.getenv("KEY_ALIAS") ?: "crescendo"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "crescendo123"
+            val keystoreFile = file("keystore/release.keystore")
+            if (keystoreFile.exists()) {
+                storeFile = keystoreFile
+                storePassword = System.getenv("STORE_PASSWORD") ?: "crescendo123"
+                keyAlias = System.getenv("KEY_ALIAS") ?: "crescendo"
+                keyPassword = System.getenv("KEY_PASSWORD") ?: "crescendo123"
+            }
         }
         getByName("debug") {
             keyAlias = "androiddebugkey"
