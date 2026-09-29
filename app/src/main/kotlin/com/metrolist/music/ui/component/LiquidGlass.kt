@@ -27,24 +27,33 @@ fun Modifier.liquidGlass(
     blurRadius: Float = 30f
 ): Modifier = composed {
     val glassModifier = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && blurRadius > 0f) {
-        this.graphicsLayer {
-            try {
-                val blurEffect = android.graphics.RenderEffect.createBlurEffect(
-                    blurRadius,
-                    blurRadius,
-                    android.graphics.Shader.TileMode.CLAMP
-                )
-                renderEffect = blurEffect.asComposeRenderEffect()
-            } catch (e: Exception) {
-                // Some devices (vivo, OPPO, etc.) crash with "nativePtr is null"
-                // even on API 31+. Gracefully skip the blur — the scrim still provides
-                // a good visual effect.
-                Log.w(TAG, "RenderEffect.createBlurEffect failed on this device, skipping blur", e)
-                renderEffect = null
-            }
-            clip = true
-        }.background(scrimColor)
+        // Create the RenderEffect once during composition to avoid native memory exhaustion
+        // and "nativePtr is null" crashes caused by recreating it on every frame inside graphicsLayer.
+        val composeBlurEffect = androidx.compose.runtime.remember(blurRadius) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                try {
+                    android.graphics.RenderEffect.createBlurEffect(
+                        blurRadius,
+                        blurRadius,
+                        android.graphics.Shader.TileMode.CLAMP
+                    ).asComposeRenderEffect()
+                } catch (e: Exception) {
+                    // Some devices (vivo, OPPO, etc.) crash with "nativePtr is null"
+                    // Gracefully skip the blur
+                    Log.w(TAG, "RenderEffect.createBlurEffect failed on this device, skipping blur", e)
+                    null
+                }
+            } else null
+        }
 
+        if (composeBlurEffect != null) {
+            this.graphicsLayer {
+                renderEffect = composeBlurEffect
+                clip = true
+            }.background(scrimColor)
+        } else {
+            this.background(scrimColor)
+        }
     } else {
         this.background(scrimColor)
     }
