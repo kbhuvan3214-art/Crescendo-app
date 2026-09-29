@@ -1,8 +1,8 @@
 package com.metrolist.music.ui.component
 
 import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
@@ -13,28 +13,42 @@ import androidx.compose.ui.graphics.asComposeRenderEffect
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 
+private const val TAG = "LiquidGlass"
+
 /**
  * Applies a liquid glass effect to the component.
- * On API 31+, this uses a blur effect. On older APIs, it falls back to a semi-transparent scrim.
+ * On API 31+, this uses a blur effect with a safe fallback for devices whose GPU
+ * doesn't support RenderEffect (e.g. some vivo, OPPO, Realme devices that throw
+ * IllegalArgumentException: "nativePtr is null").
+ * On older APIs, it falls back to a semi-transparent scrim.
  */
 fun Modifier.liquidGlass(
     scrimColor: Color = Color.Black.copy(alpha = 0.85f),
     blurRadius: Float = 30f
 ): Modifier = composed {
-    val glassModifier = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    val glassModifier = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && blurRadius > 0f) {
         this.graphicsLayer {
-            val blurEffect = android.graphics.RenderEffect.createBlurEffect(
-                blurRadius,
-                blurRadius,
-                android.graphics.Shader.TileMode.CLAMP
-            )
-            renderEffect = blurEffect.asComposeRenderEffect()
+            try {
+                val blurEffect = android.graphics.RenderEffect.createBlurEffect(
+                    blurRadius,
+                    blurRadius,
+                    android.graphics.Shader.TileMode.CLAMP
+                )
+                renderEffect = blurEffect.asComposeRenderEffect()
+            } catch (e: Exception) {
+                // Some devices (vivo, OPPO, etc.) crash with "nativePtr is null"
+                // even on API 31+. Gracefully skip the blur — the scrim still provides
+                // a good visual effect.
+                Log.w(TAG, "RenderEffect.createBlurEffect failed on this device, skipping blur", e)
+                renderEffect = null
+            }
             clip = true
         }.background(scrimColor)
+
     } else {
         this.background(scrimColor)
     }
-    
+
     // Add refractive top-edge highlight
     glassModifier.drawWithContent {
         drawContent()
@@ -52,3 +66,4 @@ fun Modifier.liquidGlass(
         )
     }
 }
+
