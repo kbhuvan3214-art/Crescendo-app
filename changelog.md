@@ -1,3 +1,16 @@
+---v1.0.1
+## 🔧 Hotfix: Device Compatibility Crash Fix
+
+### Bug Fixes
+- Fixed crash on vivo, OPPO, Realme, and other devices caused by `RenderEffect.createBlurEffect()` returning a null native pointer
+- Fixed crash when `LiquidGlass` blur radius is zero on certain OEM GPUs
+- Added graceful fallback to scrim-only background when hardware blur is unavailable
+
+### Compatibility
+- ✅ Android 6.0 (API 23) through Android 15+ (API 36)
+- ✅ Safe fallback on devices with GPU limitations — no blur, but no crash
+- ✅ Full functionality maintained on all supported devices
+
 ---v13.4.0
 # MAINTENANCE MODE
 Metrolist is currently in maintenance mode. This means we will only be fixing bugs and making minor improvements. Please do not submit PRs for new features or major changes, as they will not be accepted.
